@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+	<h:outputStylesheet library="css" name="main.css" />
+</h:head>
+<body>
+	<p:layout fullPage="true">
+
+		<p:layoutUnit position="north" size="150" styleClass="noBorder">
+			<p:layout>
+				<p:layoutUnit position="west" size="250" styleClass="noBorder">
+					<p:link href="index.xhtml">
+						<h:graphicImage id="graphicImageLogo" library="imagens"
+							name="logoEptv.png" />
+					</p:link>
+				</p:layoutUnit>
+
+				<p:layoutUnit position="east" size="250" styleClass="noBorder" />
+
+				<p:layoutUnit id="layoutTitulo" position="center"
+					styleClass="noBorder">
+					<h:outputLabel value="Relógio Jornal" />
+				</p:layoutUnit>
+			</p:layout>
+		</p:layoutUnit>
+
+		<p:layoutUnit id="layoutFooter" position="south" size="50">
+			<p:layout>
+				<p:layoutUnit position="west" size="250" styleClass="noBorder" />
+				<p:layoutUnit position="east" size="250" styleClass="noBorder" />
+				<p:layoutUnit position="center" styleClass="noBorder">
+					<h:outputLabel
+						value="Desenvolvido por Engenharia Eptv Central 2016" />
+				</p:layoutUnit>
+			</p:layout>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="west" size="320" header="Configuração"
+			resizable="true" collapsible="true">
+			<h:form id="formConfiguracao">
+				<p:separator />
+
+				<p:panel header="Horário do Jornal">
+					<h:panelGrid columns="1">
+						<p:outputLabel value="Jornal:" />
+						<p:selectOneMenu value="#{cronometroJornalBean.jornal}"
+							style="margin-left: 15px">
+							<f:selectItem itemLabel="Jornal da Eptv 1ª Edição" itemValue="1" />
+							<f:selectItem itemLabel="Jornal da Eptv 2ª Edição" itemValue="2" />
+							<f:selectItem itemLabel="Eptv Cidade" itemValue="3" />
+							<f:selectItem itemLabel="Bom Dia Cidade" itemValue="4" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Horário:" />
+						<p:calendar value="#{cronometroJornalBean.horaJornal}"
+							pattern="HH:mm" timeOnly="true" size="10"
+							style="margin-left: 15px" />
+						<p:outputLabel value="Duração:" />
+						<p:calendar value="#{cronometroJornalBean.duracao}"
+							pattern="HH:mm:ss" timeOnly="true" size="10"
+							style="margin-left: 15px" />
+						<p:outputLabel value="Blocos:" />
+						<p:inputText size="10" value="#{cronometroJornalBean.blocos}"
+							style="margin-left: 15px" />
+
+						<p:commandButton
+							actionListener="#{cronometroJornalBean.atualizarHoraJornal()}"
+							value="OK" style="float:left;margin-left: 15px; margin-top:10px" />
+					</h:panelGrid>
+				</p:panel>
+
+				<p:separator />
+
+				<p:panel header="Incluir">
+					<p:commandLink
+						action="incluirChamadasEBoletins.xhtml?faces-redirect=true"
+						value="Boletins e Chamadas" />
+				</p:panel>
+
+				<p:separator />
+			</h:form>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="east" size="320" header="Boletins e Chamadas"
+			resizable="true" collapsible="true">
+			<h:form id="formBoletinsChamadas">
+				<p:repeat
+					value="#{boletimChamadaBean.boletinsChamadasBean.listaDefinitiva}"
+					var="boletimChamada">
+					<p:commandLink
+						action="editarChamadasEBoletins.xhtml?faces-redirect=true">
+						<p:outputPanel>
+							<h:panelGrid columns="2" cellpadding="5">
+								<h:outputText value="Horário Previsto: " />
+								<h:outputText value="#{boletimChamada.horarioPrevistoStr}"
+									style="font-weight: bold" />
+
+								<h:outputText value="Programa: " />
+								<h:outputText value="#{boletimChamada.programa}"
+									style="font-weight: bold" />
+
+								<h:outputText value="Duração: " />
+								<h:outputText value="#{boletimChamada.duracaoStr}"
+									style="font-weight: bold" />
+							</h:panelGrid>
+						</p:outputPanel>
+						<f:setPropertyActionListener value="#{boletimChamada}"
+							target="#{boletimChamadaBean.boletimChamadaSelecionada}" />
+					</p:commandLink>
+					<p:separator />
+				</p:repeat>
+				<p:poll interval="1" update="formBoletinsChamadas" />
+			</h:form>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center">
+			<h:form id="formConteudo" style="padding: 30px;">
+				<ui:insert name="conteudo" />
+
+			</h:form>
+		</p:layoutUnit>
+
+	</p:layout>
+</body>
+</html>

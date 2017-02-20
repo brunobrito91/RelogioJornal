@@ -1,0 +1,114 @@
+<p:orderList id="orderListBoletimChamadas"
+					value="#{boletimChamadaBean.listaDefinitiva}" var="boletimChamada"
+					controlsLocation="none" itemValue="#{boletimChamada}"
+					itemLabel="#{boletimChamada}" responsive="true"
+					converter="boletimChamadaConverter">
+
+					<p:ajax event="select" listener="#{boletimChamadaBean.onSelect}" />
+
+				</p:orderList>
+				
+				
+				
+				
+				FacesContext context = FacesContext.getCurrentInstance();  
+        Application application = context.getApplication();  
+        ViewHandler viewHandler = application.getViewHandler();  
+        UIViewRoot viewRoot = viewHandler.createView(context, context.getViewRoot().getViewId());  
+        context.setViewRoot(viewRoot);  
+        context.renderResponse();  
+        
+        
+        
+        
+        <p:orderList id="orderListBoletimChamadas"
+					value="#{boletimChamadaBean.listaDefinitiva}" var="boletimChamada"
+					controlsLocation="none" itemValue="#{boletimChamada}"
+					itemLabel="#{boletimChamada}" responsive="true"
+					converter="boletimChamadaConverter">
+
+					<p:ajax event="select" listener="#{boletimChamadaBean.onSelect}" />
+
+				</p:orderList>
+				
+				
+				
+				
+				<p:dataTable id="dtBoletimChamada"
+					value="#{boletimChamadaBean.listaDefinitiva}" var="boletimChamada"
+					selectionMode="single"
+					selection="#{boletimChamadaBean.boletimChamadaSelecionada}"
+					rowKey="#{boletimChamada}" reflow="true">
+					<p:column priority="1">
+						<p:outputPanel autoUpdate="true">
+						#{boletimChamada.horarioPrevistoStr}
+						</p:outputPanel>
+					</p:column>
+
+					<p:column priority="2">
+						<p:outputPanel autoUpdate="true">
+						#{boletimChamada.nome}
+						</p:outputPanel>
+					</p:column>
+
+					<p:column priority="3">
+						<p:outputPanel autoUpdate="true">
+						#{boletimChamada.duracao}
+						</p:outputPanel>
+					</p:column>
+
+				</p:dataTable>
+				
+				
+				
+				try {
+			context.getExternalContext().redirect("editarChamadasEBoletins.xhtml?faces-redirect=true");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		<p:dataTable id="dtBoletimChamada"
+					value="#{boletimChamadaBean.listaDefinitiva}" var="boletimChamada"
+					selectionMode="single"
+					selection="#{boletimChamadaBean.boletimChamadaSelecionada}"
+					rowKey="#{boletimChamada}" reflow="true">
+
+					<p:ajax event="rowSelect" listener="#{boletimChamadaBean.onSelect}"
+						oncomplete="editarChamadasEBoletins.xhtml?faces-redirect=true"
+						update="dtBoletimChamada" />
+
+					<p:column priority="1">
+						<p:outputPanel>
+						#{boletimChamada.horarioPrevistoStr}
+						</p:outputPanel>
+					</p:column>
+
+					<p:column priority="2">
+						<p:outputPanel>
+						#{boletimChamada.nome}
+						</p:outputPanel>
+					</p:column>
+
+					<p:column priority="3">
+						<p:outputPanel>
+						#{boletimChamada.duracao}
+						</p:outputPanel>
+					</p:column>
+
+				</p:dataTable>
+				
+				
+				<h:outputText value="Horário Previsto: " />
+								<h:outputText value="#{boletimChamada.horarioPrevistoStr}"
+									style="font-weight: bold" />
+
+								<h:outputText value="Programa: " />
+								<h:outputText value="#{boletimChamada.nome}"
+									style="font-weight: bold" />
+
+								<h:outputText value="Duração: " />
+								<h:outputText value="#{boletimChamada.duracao}"
+									style="font-weight: bold" />

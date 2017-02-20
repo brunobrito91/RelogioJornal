@@ -1,0 +1,17 @@
+#layoutTitulo {
+	text-align: center;
+	font-size: 60px;
+}
+
+#graphicImageLogo {
+	margin-left: 65px;
+	width: 105px;
+}
+
+#layoutFooter {
+	text-align: center;
+}
+
+.noBorder {
+	border: none;
+}

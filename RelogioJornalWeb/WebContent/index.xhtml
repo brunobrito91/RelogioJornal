@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+	<ui:define name="conteudo">
+		<h:panelGrid columns="2" style="width: 100%; font-size: 100px;">
+			<f:facet name="header">
+				<p:clock pattern="HH:mm:ss" mode="server" autoSync="true" />
+			</f:facet>
+
+			<p:outputLabel value="Jornal:" />
+			<p:outputPanel id="pnlHoraJornal" autoUpdate="true">
+				#{cronometroJornalBean.horaJornalStr}
+			</p:outputPanel>
+
+			<p:outputLabel value="Faltam:" />
+			<p:outputPanel id="pnlTempoRestante" autoUpdate="true">
+				#{cronometroJornalBean.tempoRestanteStr}
+			</p:outputPanel>
+			<p:poll interval="1" update="pnlTempoRestante" />
+		</h:panelGrid>
+
+	</ui:define>
+</ui:composition>
