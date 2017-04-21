@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<ui:define name="conteudo">
+		<p:panel header="Chamadas">
+			<h:panelGrid id="pnlEdicaoChamadas" columns="1">
+
+
+				<p:selectOneMenu value="#{chamadaBean.nomeJornalChamadaSelecionada}">
+					<f:selectItems value="#{jornalBean.jornais}" var="jornal"
+						itemLabel="#{jornal.nome}" itemValue="#{jornal.nome}" />
+
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Programa: " />
+				<p:inputText value="#{chamadaBean.programaChamadaSelecionada}"
+					required="true" />
+
+				<p:outputLabel value="Duração: " />
+				<p:calendar value="#{chamadaBean.duracaoChamadaSelecionada}"
+					pattern="HH:mm:ss" timeOnly="true" size="10" required="true" />
+
+				<p:outputLabel value="Horário Previsto: " />
+				<p:calendar value="#{chamadaBean.horarioPrevistoChamadaSelecionada}"
+					pattern="HH:mm" timeOnly="true" size="10" required="true" />
+
+
+				<h:panelGrid columns="2" style="margin-top: 20px;">
+					<p:commandButton value="Atualizar"
+						action="#{chamadaBean.atualizarChamada()}"
+						update="pnlEdicaoChamadas, formConteudo:idMessage">
+
+					</p:commandButton>
+					<p:commandButton value="Excluir"
+						action="#{chamadaBean.excluirChamada}" />
+				</h:panelGrid>
+			</h:panelGrid>
+		</p:panel>
+	</ui:define>
+</ui:composition>

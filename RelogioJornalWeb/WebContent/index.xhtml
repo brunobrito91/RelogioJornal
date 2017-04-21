@@ -9,22 +9,37 @@
 
 
 	<ui:define name="conteudo">
-		<h:panelGrid columns="2" style="width: 100%; font-size: 100px;">
+		<h:panelGrid width="100%" cellspacing="20"
+			style="text-align: center;font-size:4vw">
 			<f:facet name="header">
 				<p:clock pattern="HH:mm:ss" mode="server" autoSync="true" />
 			</f:facet>
 
-			<p:outputLabel value="Jornal:" />
 			<p:outputPanel id="pnlHoraJornal" autoUpdate="true">
-				#{cronometroJornalBean.horaJornalStr}
+				#{jornalBean.jornal}
+			</p:outputPanel>
+		</h:panelGrid>
+
+		<p:separator style="margin-top:5px; margin-bottom:5px" />
+
+		<h:panelGrid width="100%" cellspacing="20" columns="2"
+			columnClasses="colunas" style="text-align: center;font-size:4vw">
+			<p:outputLabel value="Hora:" />
+			<p:outputPanel id="pnlJornal" autoUpdate="true">
+				#{jornalBean.horaJornalStr}
 			</p:outputPanel>
 
 			<p:outputLabel value="Faltam:" />
-			<p:outputPanel id="pnlTempoRestante" autoUpdate="true">
-				#{cronometroJornalBean.tempoRestanteStr}
+			<p:outputPanel id="pnlTempoRestante" autoUpdate="true"
+				style="background-color:#{jornalBean.backgroundColor}; color:#{jornalBean.color};">
+				#{jornalBean.tempoRestanteStr}
 			</p:outputPanel>
-			<p:poll interval="1" update="pnlTempoRestante" />
 		</h:panelGrid>
-
+		<style>
+.colunas {
+	width: 50%;
+}
+</style>
+		<p:poll interval="1" update="pnlTempoRestante" />
 	</ui:define>
 </ui:composition>

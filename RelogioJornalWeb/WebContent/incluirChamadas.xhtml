@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<ui:define name="conteudo">
+		<p:panel header="Chamadas">
+			<h:panelGrid id="pnlInclusaoChamadas" columns="1">
+
+				<p:selectOneMenu value="#{chamadaBean.nomeJornal}">
+					<f:selectItems value="#{jornalBean.jornais}" var="jornal"
+						itemLabel="#{jornal.nome}" itemValue="#{jornal.nome}" />
+
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Programa: " />
+				<p:inputText id="programa" value="#{chamadaBean.programa}"
+					required="true" />
+				<p:message for="programa" display="icon" />
+
+				<p:outputLabel value="Duração: " />
+				<p:calendar id="duracao" value="#{chamadaBean.duracao}"
+					pattern="HH:mm:ss" timeOnly="true" size="10" required="true" />
+				<p:message for="duracao" display="icon" />
+
+				<p:outputLabel value="Horário Previsto: " />
+				<p:calendar id="previsto" value="#{chamadaBean.horarioPrevisto}"
+					pattern="HH:mm" timeOnly="true" size="10" required="true" />
+				<p:message for="previsto" display="icon" />
+
+				<p:commandButton update="dtChamadas, pnlInclusaoChamadas" value="OK"
+					action="#{chamadaBean.incluirNaTabela()}" />
+			</h:panelGrid>
+
+			<p:separator />
+
+			<p:dataTable id="dtChamadas" var="chamada"
+				value="#{chamadaBean.listaTemporaria}">
+
+				<p:column headerText="Jornal:">
+					<h:outputText value="#{chamada.nomeJornal}" />
+				</p:column>
+				<p:column headerText="Programa:">
+					<h:outputText value="#{chamada.programa}" />
+				</p:column>
+				<p:column headerText="Duração">
+					<h:outputText value="#{chamada.duracaoStr}" />
+				</p:column>
+				<p:column headerText="Horário Previsto">
+					<h:outputText value="#{chamada.horarioPrevistoStr}" />
+				</p:column>
+
+				<f:facet name="footer">
+					<p:commandButton action="#{chamadaBean.incluir}" value="Incluir"
+						update="formConteudo:idMessage, dtChamadas" immediate="true" />
+				</f:facet>
+
+			</p:dataTable>
+		</p:panel>
+	</ui:define>
+</ui:composition>

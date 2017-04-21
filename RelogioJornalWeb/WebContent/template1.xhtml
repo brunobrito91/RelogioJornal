@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+	<h:outputStylesheet library="css" name="mainStyle.css" />
+</h:head>
+<body>
+	<p:layout fullPage="true">
+
+		<p:layoutUnit position="north" size="130" styleClass="noBorder">
+			<p:layout>
+				<p:layoutUnit id="logo" position="west" size="250"
+					styleClass="noBorder">
+
+					<p:link href="index1.xhtml">
+						<h:graphicImage id="graphicImageLogo" library="imagens"
+							name="logoEptv.png" />
+					</p:link>
+
+				</p:layoutUnit>
+
+				<p:layoutUnit position="east" size="250" styleClass="noBorder" />
+
+				<p:layoutUnit id="layoutTitulo" position="center"
+					styleClass="noBorder">
+					<h:outputLabel value="Relógio Jornal" />
+				</p:layoutUnit>
+			</p:layout>
+		</p:layoutUnit>
+
+		<p:layoutUnit id="layoutFooter" position="south" size="50">
+			<p:layout>
+				<p:layoutUnit position="west" size="250" styleClass="noBorder" />
+				<p:layoutUnit position="east" size="250" styleClass="noBorder" />
+				<p:layoutUnit position="center" styleClass="noBorder">
+					<h:outputLabel
+						value="© Copyright 2017 Desenvolvido por Engenharia Eptv Central" />
+				</p:layoutUnit>
+			</p:layout>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center" id="idConteudo">
+			<h:form id="formConteudo">
+				<p:growl id="idMessage" showDetail="true" />
+				<ui:insert name="conteudo" />
+
+			</h:form>
+		</p:layoutUnit>
+
+	</p:layout>
+</body>
+</html>

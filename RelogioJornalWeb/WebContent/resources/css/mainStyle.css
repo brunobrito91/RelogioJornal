@@ -1,0 +1,23 @@
+#layoutTitulo {
+	text-align: center;
+	font-size: 60px;
+}
+
+#graphicImageLogo {
+	margin-left: 65px;
+	width: 105px;
+}
+
+#layoutFooter {
+	text-align: center;
+}
+
+.noBorder {
+	border: none;
+	overflow-y: hidden !important;
+	overflow-x: hidden !important;
+}
+
+#logo div.ui-layout-unit-content.ui-widget-content, #idConteudo {
+	overflow: hidden;
+}
